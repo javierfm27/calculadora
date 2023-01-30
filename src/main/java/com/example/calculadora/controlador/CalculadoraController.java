@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.calculadora.servicios.CalculadoraServiceImpl;
 
+import io.corp.calculator.TracerImpl;
+
 @RestController
 @RequestMapping("/api")
 public class CalculadoraController 
@@ -19,7 +21,9 @@ public class CalculadoraController
 	@Autowired
 	private CalculadoraServiceImpl calculService;
 	
-	@PostMapping(value = "calcula")
+	private TracerImpl tracerClass = new TracerImpl();
+	
+	@PostMapping(value = "ejecuta")
 	public  ResponseEntity<Double> calculaOperacion(
 			@RequestParam(name = "num1") String num1,
 			@RequestParam(name = "num2") String num2,
@@ -27,6 +31,7 @@ public class CalculadoraController
 	{
 		double resultado = calculService.calcularOperacion(num1, num2, operacion);
 		
+		tracerClass.trace(resultado);
 		return new ResponseEntity<Double>(resultado, HttpStatus.OK);
 	}
 }
