@@ -11,7 +11,7 @@ public class CalculadoraServiceImpl implements CalculadoraService
 	Log log = LogFactory.getLog(CalculadoraServiceImpl.class);
 	
 	@Override
-	public double calcularOperacion(String num1, String num2, String operacion) 
+	public double calcularOperacion(String num1, String num2, String operacion) throws NumberFormatException
 	{
 		Integer op1 = Integer.parseInt(num1);
 		Integer op2 = Integer.parseInt(num2);
@@ -35,7 +35,7 @@ public class CalculadoraServiceImpl implements CalculadoraService
 				throw new IllegalArgumentException("Unexpected value: " + operacion);
 		}
 		
-		return resultado;
+		return resultado;		
 	}
 
 }
